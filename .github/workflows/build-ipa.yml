@@ -65,4 +65,3 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "ios-${{ github.run_number }}-${{ github.run_attempt }}" RockRadioNet.ipa --repo "${{ github.repository }}" --title "RockRadioNet для iOS — сборка ${{ github.run_number }}" --notes "Скачайте RockRadioNet.ipa и установите через Sideloadly (подпишите своим Apple ID)."
-
