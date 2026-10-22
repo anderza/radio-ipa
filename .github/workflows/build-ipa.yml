@@ -38,6 +38,7 @@ jobs:
         run: cd "$PROJ" && xcodegen generate
       - name: Собрать приложение (без подписи)
         run: |
+          set -o pipefail
           cd "$PROJ" && xcodebuild \
             -project RockRadioNet.xcodeproj \
             -scheme RockRadioNet \
@@ -48,7 +49,20 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            build
+            build 2>&1 | tee "$GITHUB_WORKSPACE/build.log"
+      - name: Показать ошибки сборки
+        if: failure()
+        run: |
+          echo "===== ОШИБКИ СБОРКИ ====="
+          grep -E "error:|fatal error|BUILD FAILED" build.log | sort -u | head -60 || true
+          { echo '### Ошибки сборки'; echo '```'; grep -E "error:|fatal error|BUILD FAILED" build.log | sort -u | head -40; echo '```'; } >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Сохранить журнал сборки
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: RockRadioNet-build-log
+          path: build.log
+          if-no-files-found: ignore
       - name: Упаковать IPA
         run: |
           APP="$PROJ/build/Build/Products/Release-iphoneos/RockRadioNet.app"
