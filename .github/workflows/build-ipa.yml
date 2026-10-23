@@ -18,12 +18,17 @@ jobs:
   ios:
     name: iOS (IPA)
     runs-on: macos-15
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Выбрать Xcode 16
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer || sudo xcode-select -s "$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)/Contents/Developer"
+      - name: Выбрать Xcode 16.4
+        run: |
+          # У Xcode 16.0–16.3 на раннере GitHub нет установленной платформы iOS, и сборка может упасть
+          # с «iOS 18.2 is not installed». У Xcode 16.4 платформа есть. Если его уберут с раннера — остаётся Xcode по умолчанию.
+          X=/Applications/Xcode_16.4.app
+          if [ -d "$X" ]; then sudo xcode-select -s "$X/Contents/Developer"; else echo "::warning::Xcode 16.4 не найден, используется Xcode по умолчанию"; fi
       - name: Версии инструментов
         run: |
           xcodebuild -version
@@ -53,17 +58,30 @@ jobs:
       - name: Собрать приложение (без подписи)
         run: |
           set -o pipefail
-          cd "$PROJ" && xcodebuild \
-            -project RockRadioNet.xcodeproj \
-            -scheme RockRadioNet \
-            -configuration Release \
-            -sdk iphoneos \
-            -destination "generic/platform=iOS" \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGN_IDENTITY="" \
-            build 2>&1 | tee "$GITHUB_WORKSPACE/build.log"
+          cd "$PROJ" || exit 1
+          LOG="$GITHUB_WORKSPACE/build.log"; : > "$LOG"
+          build() {
+            xcodebuild \
+              -project RockRadioNet.xcodeproj \
+              -scheme RockRadioNet \
+              -configuration Release \
+              -sdk iphoneos \
+              -destination "generic/platform=iOS" \
+              -derivedDataPath build \
+              CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGN_IDENTITY="" \
+              build 2>&1 | tee -a "$LOG"
+          }
+          if build; then exit 0; fi
+          # Если Xcode не нашёл платформу iOS («… is not installed») — докачиваем её и собираем ещё раз.
+          if grep -q "is not installed" "$LOG"; then
+            echo "::warning::Xcode не нашёл платформу iOS — скачиваю её и собираю ещё раз"
+            xcodebuild -downloadPlatform iOS || true
+            build
+          else
+            exit 1
+          fi
       - name: Показать ошибки сборки
         if: failure()
         run: |
