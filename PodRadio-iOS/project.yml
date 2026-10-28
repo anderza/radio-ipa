@@ -1,0 +1,29 @@
+name: PodRadio
+options:
+  bundleIdPrefix: com.rockradionet
+  deploymentTarget:
+    iOS: "15.0"
+targets:
+  PodRadio:
+    type: application
+    platform: iOS
+    sources:
+      - path: PodRadio
+        excludes:
+          - "www/**"
+          - "Info.plist"
+      - path: PodRadio/www
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.rockradionet.player
+        PRODUCT_NAME: PodRadio
+        INFOPLIST_FILE: PodRadio/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        MARKETING_VERSION: "1.25"
+        CURRENT_PROJECT_VERSION: "26"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic

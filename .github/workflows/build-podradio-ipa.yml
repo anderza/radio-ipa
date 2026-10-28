@@ -1,0 +1,99 @@
+name: Сборка PodRadio iOS (IPA)
+
+# Запускается при изменении папки PodRadio-iOS (или этого файла),
+# а также вручную: Actions → «Сборка PodRadio iOS (IPA)» → Run workflow.
+# IPA собирается без подписи: его подписывает Sideloadly на Windows/Mac своим Apple ID.
+on:
+  push:
+    paths:
+      - "PodRadio-iOS/**"
+      - ".github/workflows/build-podradio-ipa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ios:
+    name: iOS (IPA)
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Выбрать Xcode 16.4
+        run: |
+          # У Xcode 16.0–16.3 на раннере GitHub нет установленной платформы iOS, и сборка может упасть
+          # с «iOS 18.2 is not installed». У Xcode 16.4 платформа есть. Если его уберут с раннера — остаётся Xcode по умолчанию.
+          X=/Applications/Xcode_16.4.app
+          if [ -d "$X" ]; then sudo xcode-select -s "$X/Contents/Developer"; else echo "::warning::Xcode 16.4 не найден, используется Xcode по умолчанию"; fi
+      - name: Версии инструментов
+        run: |
+          xcodebuild -version
+          xcrun simctl list runtimes || true
+      - name: Проект
+        run: echo "PROJ=$PWD/PodRadio-iOS" >> "$GITHUB_ENV"
+      - name: Установить XcodeGen
+        run: brew install xcodegen
+      - name: Создать проект Xcode
+        run: cd "$PROJ" && xcodegen generate
+      - name: Собрать приложение (без подписи)
+        run: |
+          set -o pipefail
+          cd "$PROJ" || exit 1
+          LOG="$GITHUB_WORKSPACE/build.log"; : > "$LOG"
+          build() {
+            xcodebuild \
+              -project PodRadio.xcodeproj \
+              -scheme PodRadio \
+              -configuration Release \
+              -sdk iphoneos \
+              -destination "generic/platform=iOS" \
+              -derivedDataPath build \
+              CODE_SIGNING_ALLOWED=NO \
+              CODE_SIGNING_REQUIRED=NO \
+              CODE_SIGN_IDENTITY="" \
+              build 2>&1 | tee -a "$LOG"
+          }
+          if build; then exit 0; fi
+          # Если Xcode не нашёл платформу iOS («… is not installed») — докачиваем её и собираем ещё раз.
+          if grep -q "is not installed" "$LOG"; then
+            echo "::warning::Xcode не нашёл платформу iOS — скачиваю её и собираю ещё раз"
+            xcodebuild -downloadPlatform iOS || true
+            build
+          else
+            exit 1
+          fi
+      - name: Показать ошибки сборки
+        if: failure()
+        run: |
+          echo "===== ОШИБКИ СБОРКИ ====="
+          grep -E "error:|fatal error|BUILD FAILED" build.log | sort -u | head -60 || true
+          grep "error:" build.log | sort -u | head -5 | while IFS= read -r l; do echo "::error::$l"; done || true
+          echo "----- упавшие команды -----"
+          grep -A6 "The following build commands failed" build.log | head -20 || true
+          { echo '### Ошибки сборки'; echo '```'; grep -E "error:|fatal error|BUILD FAILED" build.log | sort -u | head -40; echo '```'; } >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Сохранить журнал сборки
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PodRadio-build-log
+          path: build.log
+          if-no-files-found: ignore
+      - name: Упаковать IPA
+        run: |
+          APP="$PROJ/build/Build/Products/Release-iphoneos/PodRadio.app"
+          if [ ! -d "$APP" ]; then echo "::error::Приложение не собралось"; exit 1; fi
+          rm -rf Payload && mkdir Payload && cp -R "$APP" Payload/
+          zip -qr PodRadio.ipa Payload
+          rm -rf Payload
+          ls -la PodRadio.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PodRadio-IPA
+          path: PodRadio.ipa
+      - name: Выложить в Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "podradio-ios-${{ github.run_number }}-${{ github.run_attempt }}" --target "$GITHUB_SHA" PodRadio.ipa --repo "${{ github.repository }}" --title "PodRadio для iOS — сборка ${{ github.run_number }}" --notes "Скачайте PodRadio.ipa и установите через Sideloadly (подпишите своим Apple ID)."
