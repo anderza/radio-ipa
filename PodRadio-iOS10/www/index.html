@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>PodRadio</title>
+<style>
+/* PodRadio Lite — для старых iPad (iOS 10): без flex-gap, inset, aspect-ratio, clamp/min/max */
+:root{--bg:#3c3a38;--panel:#4a4846;--line:#5a5856;--txt:#f2f0ee;--dim:#b9b5b1;--acc:#e8e4df;--on:#ffcf4a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font:16px -apple-system,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+#np{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:18px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+#logo{width:96px;height:96px;border-radius:14px;background:#2e2d2c center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:18px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:40px;font-weight:700;color:#8d8985}
+#info{-webkit-flex:1;flex:1;min-width:0}
+#sn{font-size:24px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tr{margin-top:6px;font-size:17px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#st{margin-top:4px;font-size:13px;color:var(--dim)}
+#ctl{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:12px}
+.cb{width:56px;height:56px;border-radius:50%;background:#e9e6e2;color:#4a4846;margin-left:10px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.cb svg{width:26px;height:26px;fill:currentColor}
+#pp{width:78px;height:78px}
+#pp svg{width:36px;height:36px}
+#fav{font-size:30px;width:48px;height:48px;margin-left:10px;color:var(--dim)}
+#fav.on{color:var(--on)}
+#bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line)}
+.tab{padding:8px 14px;border-radius:18px;margin-right:8px;color:var(--dim)}
+.tab.on{background:var(--acc);color:#3c3a38}
+#q{-webkit-flex:1;flex:1;min-width:0;margin:0 10px;padding:9px 14px;border-radius:18px;border:0;background:#2e2d2c;color:var(--txt);font:inherit;-webkit-user-select:text;user-select:text}
+#add{font-size:26px;width:40px;height:40px;border-radius:50%;background:#2e2d2c}
+#genres{display:-webkit-flex;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 20px 4px;white-space:nowrap}
+.g{-webkit-flex:none;flex:none;padding:5px 12px;margin-right:8px;border-radius:14px;border:1px solid var(--line);color:var(--dim);font-size:14px}
+.g.on{border-color:var(--acc);color:var(--txt)}
+#list{-webkit-flex:1;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 12px 30px}
+.row{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:8px;border-radius:12px}
+.row.cur{background:var(--panel)}
+.li{width:48px;height:48px;border-radius:10px;background:#2e2d2c center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:14px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-weight:700;color:#8d8985}
+.rn{-webkit-flex:1;flex:1;min-width:0}
+.rn b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rn i{display:block;font-style:normal;font-size:13px;color:var(--dim)}
+.rf{font-size:24px;width:44px;height:44px;color:var(--dim)}
+.rf.on{color:var(--on)}
+.rx{font-size:18px;width:40px;height:44px;color:var(--dim)}
+#empty{padding:30px;text-align:center;color:var(--dim)}
+#copy{text-align:center;color:#8d8985;font-size:12px;padding:6px}
+</style>
+</head>
+<body>
+<div id="np">
+  <div id="logo"></div>
+  <div id="info"><div id="sn">PodRadio</div><div id="tr">Выберите станцию</div><div id="st"></div></div>
+  <div id="ctl">
+    <button id="fav" aria-label="Избранное">☆</button>
+    <button class="cb" id="prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
+    <button class="cb" id="pp" aria-label="Пуск"></button>
+    <button class="cb" id="next" aria-label="Следующая"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zM16 6h2v12h-2z"/></svg></button>
+  </div>
+</div>
+<div id="bar">
+  <button class="tab on" data-v="all">Станции</button>
+  <button class="tab" data-v="fav">Избранное</button>
+  <input id="q" type="search" placeholder="Поиск" autocomplete="off">
+  <button id="add" aria-label="Добавить станцию">+</button>
+</div>
+<div id="genres"></div>
+<div id="list"></div>
+<div id="copy">© Запольский Андрей</div>
+<script src="stations.js"></script>
+<script>
+(function(){
+"use strict";
+var PLAY='<svg viewBox="0 0 24 24"><path d="M6.5 5l11 7-11 7z"/></svg>',PAUSE='<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+function $(s){return document.querySelector(s)}
+function load(k,d){try{var v=localStorage.getItem("pr_"+k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem("pr_"+k,JSON.stringify(v))}catch(e){}}
+function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function post(m){try{window.webkit.messageHandlers.rrn.postMessage(m)}catch(e){}}
+
+var own=load("own",[]),favs=load("favs",[]),view="all",genre="Все",q="",cur=load("last",""),state="stop",track="";
+function all(){return own.concat(DEF)}
+function byUrl(u){var a=all();for(var i=0;i<a.length;i++)if(a[i].u===u)return a[i];return null}
+function isFav(u){return favs.indexOf(u)>=0}
+function shown(){
+  var a=all(),out=[],ql=q.toLowerCase();
+  for(var i=0;i<a.length;i++){var s=a[i];
+    if(view==="fav"&&!isFav(s.u))continue;
+    if(genre!=="Все"&&(s.g||"Без жанра")!==genre)continue;
+    if(ql&&s.n.toLowerCase().indexOf(ql)<0)continue;
+    out.push(s)}
+  return out;
+}
+/* логотип: картинка, а если не загрузилась (например, webp на iOS 10) — первая буква */
+function setLogo(el,s){
+  el.style.backgroundImage="";el.textContent=(s&&s.n?s.n.charAt(0).toUpperCase():"");
+  if(!s||!s.l||/\.webp(\?|$)/i.test(s.l))return;
+  var im=new Image();im.onload=function(){el.style.backgroundImage='url("'+s.l.replace(/"/g,"%22")+'")';el.textContent=""};im.src=s.l;
+}
+function renderGenres(){
+  var set={"Все":1},a=all(),h="";
+  for(var i=0;i<a.length;i++)set[a[i].g||"Без жанра"]=1;
+  Object.keys(set).forEach(function(g){h+='<button class="g'+(g===genre?" on":"")+'" data-g="'+esc(g)+'">'+esc(g)+'</button>'});
+  $("#genres").innerHTML=h;
+}
+function renderList(){
+  var a=shown(),h="";
+  for(var i=0;i<a.length;i++){var s=a[i],o=own.some(function(x){return x.u===s.u});
+    h+='<div class="row'+(s.u===cur?" cur":"")+'" data-u="'+esc(s.u)+'"><div class="li"></div><div class="rn"><b>'+esc(s.n)+'</b><i>'+esc(s.g||"")+'</i></div>'+
+      '<button class="rf'+(isFav(s.u)?" on":"")+'" data-f="1">'+(isFav(s.u)?"★":"☆")+'</button>'+(o?'<button class="rx" data-x="1">✕</button>':"")+'</div>'}
+  $("#list").innerHTML=h||'<div id="empty">'+(view==="fav"?"В избранном пока пусто: нажмите ☆ у станции":"Ничего не найдено")+'</div>';
+  var rows=document.querySelectorAll("#list .row");
+  for(var j=0;j<rows.length;j++)setLogo(rows[j].querySelector(".li"),byUrl(rows[j].getAttribute("data-u")));
+}
+function renderNP(){
+  var s=byUrl(cur);
+  $("#sn").textContent=s?s.n:"PodRadio";
+  $("#tr").textContent=track||(s?(s.g||"Интернет-радио"):"Выберите станцию");
+  $("#st").textContent={play:"Играет",load:"Подключение…",err:"Поток недоступен",stop:s?"Пауза":""}[state]||"";
+  $("#pp").innerHTML=(state==="play"||state==="load")?PAUSE:PLAY;
+  var f=$("#fav");f.textContent=s&&isFav(s.u)?"★":"☆";f.className=s&&isFav(s.u)?"on":"";
+  setLogo($("#logo"),s);
+}
+function render(){renderGenres();renderList();renderNP()}
+
+function playUrl(u){
+  var s=byUrl(u);if(!s)return;
+  cur=u;save("last",u);track="";state="load";
+  post({cmd:"play",url:s.u,title:s.n,genre:s.g||""});
+  renderNP();renderList();
+}
+function toggle(){
+  if(!cur){var a=shown();if(a.length)playUrl(a[0].u);return}
+  if(state==="play"||state==="load"){post({cmd:"pause"});state="stop";renderNP()}
+  else playUrl(cur);
+}
+function step(d){
+  var a=shown();if(!a.length)a=all();
+  var i=-1;for(var k=0;k<a.length;k++)if(a[k].u===cur)i=k;
+  playUrl(a[(i+d+a.length)%a.length].u);
+}
+function favToggle(u){var i=favs.indexOf(u);if(i>=0)favs.splice(i,1);else favs.push(u);save("favs",favs);render()}
+
+/* вызовы из приложения: состояние плеера, название трека, кнопки экрана блокировки и наушников */
+window.rrnState=function(s){state=s;renderNP()};
+window.rrnTrack=function(t){track=t||"";renderNP();post({cmd:"np",title:track})};
+window.rrnKey=function(k){
+  if(k==="toggle")toggle();
+  else if(k==="play"){if(state!=="play"&&state!=="load")toggle()}
+  else if(k==="pause"){if(state==="play"||state==="load")toggle()}
+  else if(k==="next")step(1);else if(k==="prev")step(-1);
+};
+
+$("#pp").onclick=toggle;
+$("#prev").onclick=function(){step(-1)};
+$("#next").onclick=function(){step(1)};
+$("#fav").onclick=function(){if(cur)favToggle(cur)};
+$("#bar").onclick=function(e){var t=e.target.closest?e.target.closest(".tab"):null;if(!t)return;view=t.getAttribute("data-v");
+  var ts=document.querySelectorAll(".tab");for(var i=0;i<ts.length;i++)ts[i].className="tab"+(ts[i]===t?" on":"");renderList()};
+$("#genres").onclick=function(e){var g=e.target.getAttribute("data-g");if(g){genre=g;renderGenres();renderList()}};
+$("#q").oninput=function(){q=this.value;renderList()};
+$("#list").onclick=function(e){
+  var r=e.target.closest?e.target.closest(".row"):null;if(!r)return;var u=r.getAttribute("data-u");
+  if(e.target.getAttribute("data-f")){favToggle(u);return}
+  if(e.target.getAttribute("data-x")){if(confirm("Удалить станцию?")){own=own.filter(function(x){return x.u!==u});save("own",own);if(cur===u){post({cmd:"pause"});cur="";state="stop"}render()}return}
+  if(u===cur&&(state==="play"||state==="load"))return;
+  playUrl(u);
+};
+$("#add").onclick=function(){
+  var u=prompt("Ссылка на поток (http/https, mp3, aac или m3u8):","");if(!u)return;u=u.trim();
+  if(!/^https?:\/\//i.test(u)){alert("Нужна ссылка, начинающаяся с http:// или https://");return}
+  var n=prompt("Название станции:","")||u.replace(/^https?:\/\//i,"").split("/")[0];
+  own.unshift({n:n,u:u,g:"Мои",l:""});save("own",own);render();
+};
+render();
+})();
+</script>
+</body>
+</html>

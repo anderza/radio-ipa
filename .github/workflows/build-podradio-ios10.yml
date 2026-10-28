@@ -1,0 +1,42 @@
+name: Сборка PodRadio Lite для iOS 10 (IPA, armv7 + arm64)
+
+# Для старых iPad/iPhone на iOS 10 (например, iPad 4). Xcode на GitHub не умеет armv7,
+# поэтому собираем на Linux: тулчейн L1ghtmann (clang, ld64, lipo, ldid) и iPhoneOS10.3.sdk из theos/sdks.
+on:
+  push:
+    paths:
+      - "PodRadio-iOS10/**"
+      - ".github/workflows/build-podradio-ios10.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ios10:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Тулчейн и SDK
+        run: |
+          mkdir -p ~/ios && cd ~/ios
+          curl -sSL -o tc.tar.xz https://github.com/L1ghtmann/llvm-project/releases/latest/download/iOSToolchain-x86_64.tar.xz
+          curl -sSL -o sdk.tar.xz https://github.com/theos/sdks/releases/download/master-146e41f/iPhoneOS10.3.sdk.tar.xz
+          mkdir tc sdk && tar xJf tc.tar.xz -C tc && tar xJf sdk.tar.xz -C sdk
+          echo "TC=$HOME/ios/tc/linux/iphone/bin" >> "$GITHUB_ENV"
+          echo "SDK=$HOME/ios/sdk/iPhoneOS10.3.sdk" >> "$GITHUB_ENV"
+      - name: Сборка
+        run: |
+          bash PodRadio-iOS10/build.sh
+          file PodRadio-iOS10/out/Payload/PodRadio.app/PodRadio
+          "$TC/otool" -l PodRadio-iOS10/out/PodRadio.armv7 | grep -A3 LC_VERSION_MIN
+          cp PodRadio-iOS10/out/PodRadio-iOS10.ipa .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PodRadio-iOS10-IPA
+          path: PodRadio-iOS10.ipa
+      - name: Выложить в Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "podradio-ios10-${{ github.run_number }}-${{ github.run_attempt }}" PodRadio-iOS10.ipa --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "PodRadio Lite для iOS 10 — сборка ${{ github.run_number }}" --notes "Для iPad 4 и других устройств на iOS 10+. Установка через Sideloadly (подпишите своим Apple ID)."
