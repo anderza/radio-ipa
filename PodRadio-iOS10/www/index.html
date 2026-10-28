@@ -17,18 +17,19 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 #sn{font-size:24px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #tr{margin-top:6px;font-size:17px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #st{margin-top:4px;font-size:13px;color:var(--dim)}
-#ctl{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:12px}
-.cb{width:56px;height:56px;border-radius:50%;background:#e9e6e2;color:#4a4846;margin-left:10px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.cb svg{width:26px;height:26px;fill:currentColor}
+#ctl{white-space:nowrap;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:12px}
+/* в Safari iOS 10 кнопка не бывает flex-контейнером, поэтому значок ставим по центру абсолютно */
+.cb{position:relative;display:block;-webkit-flex:none;flex:none;width:56px;height:56px;border-radius:50%;background:#e9e6e2;color:#4a4846;margin-left:10px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.cb svg{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;fill:currentColor;display:block}
 #pp{width:78px;height:78px}
-#pp svg{width:36px;height:36px}
-#fav{font-size:30px;width:48px;height:48px;margin-left:10px;color:var(--dim)}
+#pp svg{width:36px;height:36px;margin:-18px 0 0 -18px}
+#fav{display:block;-webkit-flex:none;flex:none;font-size:30px;width:48px;height:48px;line-height:48px;text-align:center;margin-left:10px;color:var(--dim)}
 #fav.on{color:var(--on)}
 #bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line)}
-.tab{padding:8px 14px;border-radius:18px;margin-right:8px;color:var(--dim)}
+.tab{-webkit-flex:none;flex:none;padding:8px 14px;border-radius:18px;margin-right:8px;color:var(--dim)}
 .tab.on{background:var(--acc);color:#3c3a38}
 #q{-webkit-flex:1;flex:1;min-width:0;margin:0 10px;padding:9px 14px;border-radius:18px;border:0;background:#2e2d2c;color:var(--txt);font:inherit;-webkit-user-select:text;user-select:text}
-#add{font-size:26px;width:40px;height:40px;border-radius:50%;background:#2e2d2c}
+#add{display:block;-webkit-flex:none;flex:none;font-size:26px;width:40px;height:40px;line-height:38px;text-align:center;border-radius:50%;background:#2e2d2c}
 #genres{display:-webkit-flex;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 20px 4px;white-space:nowrap}
 .g{-webkit-flex:none;flex:none;padding:5px 12px;margin-right:8px;border-radius:14px;border:1px solid var(--line);color:var(--dim);font-size:14px}
 .g.on{border-color:var(--acc);color:var(--txt)}
@@ -39,10 +40,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .rn{-webkit-flex:1;flex:1;min-width:0}
 .rn b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rn i{display:block;font-style:normal;font-size:13px;color:var(--dim)}
-.rf{font-size:24px;width:44px;height:44px;color:var(--dim)}
+.rf{display:block;-webkit-flex:none;flex:none;font-size:24px;width:44px;height:44px;line-height:44px;text-align:center;color:var(--dim)}
 .rf.on{color:var(--on)}
-.rx{font-size:18px;width:40px;height:44px;color:var(--dim)}
+.rx{display:block;-webkit-flex:none;flex:none;font-size:18px;width:40px;height:44px;line-height:44px;text-align:center;color:var(--dim)}
 #empty{padding:30px;text-align:center;color:var(--dim)}
+@media (max-width:600px){#logo{width:64px;height:64px;font-size:28px;margin-right:12px}.cb{width:46px;height:46px;margin-left:6px}#pp{width:62px;height:62px}#fav{margin-left:4px}}
 #copy{text-align:center;color:#8d8985;font-size:12px;padding:6px}
 </style>
 </head>
