@@ -5,85 +5,129 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>PodRadio</title>
 <style>
-/* PodRadio Lite — для старых iPad (iOS 10): без flex-gap, inset, aspect-ratio, clamp/min/max */
-:root{--bg:#3c3a38;--panel:#4a4846;--line:#5a5856;--txt:#f2f0ee;--dim:#b9b5b1;--acc:#e8e4df;--on:#ffcf4a}
+/* PodRadio Lite — для старых iPad (iOS 10): без flex-gap, inset, aspect-ratio, clamp/min/max;
+   кнопка в старом Safari не бывает flex-контейнером, поэтому содержимое кнопок центрируется line-height или абсолютно */
+:root{--bg:#3c3a38;--panel:#4a4846;--rail:#33312f;--line:#5a5856;--txt:#f2f0ee;--dim:#b9b5b1;--acc:#e8e4df;--on:#ffcf4a;--field:#2e2d2c;--btn:#e9e6e2;--btnt:#4a4846}
+body.light{--bg:#e6e3df;--panel:#f4f2ef;--rail:#d6d2cd;--line:#c9c4be;--txt:#2e2c2a;--dim:#6f6a65;--acc:#4a4846;--on:#d99a00;--field:#fff;--btn:#4a4846;--btnt:#f2f0ee}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font:16px -apple-system,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none}
-body{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
-#np{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:18px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
-#logo{width:96px;height:96px;border-radius:14px;background:#2e2d2c center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:18px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:40px;font-weight:700;color:#8d8985}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font:16px -apple-system,Helvetica,Arial,sans-serif;-webkit-user-select:none;user-select:none;overflow:hidden}
+body{display:-webkit-flex;display:flex}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;-webkit-appearance:none}
+
+/* боковая панель */
+#rail{width:96px;-webkit-flex:none;flex:none;background:var(--rail);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 0;border-right:1px solid var(--line)}
+.nav{display:block;width:84px;height:76px;margin:4px auto;border-radius:16px;text-align:center;color:var(--dim);position:relative}
+.nav .ic{display:block;font-size:28px;line-height:34px;padding-top:8px}
+.nav .lb{display:block;font-size:12px;line-height:16px;margin-top:4px}
+.nav.on{background:var(--panel);color:var(--txt)}
+
+#main{-webkit-flex:1;flex:1;min-width:0;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column}
+
+/* плеер вверху */
+#np{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:16px 18px;background:var(--panel);border-bottom:1px solid var(--line);-webkit-flex:none;flex:none}
+#logo{width:92px;height:92px;border-radius:14px;background:var(--field) center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:16px;text-align:center;line-height:92px;font-size:38px;font-weight:700;color:#8d8985;overflow:hidden}
 #info{-webkit-flex:1;flex:1;min-width:0}
-#sn{font-size:24px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sn{font-size:23px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #tr{margin-top:6px;font-size:17px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #st{margin-top:4px;font-size:13px;color:var(--dim)}
-#ctl{white-space:nowrap;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:12px}
-/* в Safari iOS 10 кнопка не бывает flex-контейнером, поэтому значок ставим по центру абсолютно */
-.cb{position:relative;display:block;-webkit-flex:none;flex:none;width:56px;height:56px;border-radius:50%;background:#e9e6e2;color:#4a4846;margin-left:10px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+#ctl{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:10px;white-space:nowrap}
+.cb{position:relative;display:block;-webkit-flex:none;flex:none;width:56px;height:56px;border-radius:50%;background:var(--btn);color:var(--btnt);margin-left:10px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 .cb svg{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;fill:currentColor;display:block}
 #pp{width:78px;height:78px}
 #pp svg{width:36px;height:36px;margin:-18px 0 0 -18px}
-#fav{display:block;-webkit-flex:none;flex:none;font-size:30px;width:48px;height:48px;line-height:48px;text-align:center;margin-left:10px;color:var(--dim)}
+#fav{display:block;-webkit-flex:none;flex:none;font-size:30px;width:48px;height:48px;line-height:48px;text-align:center;color:var(--dim)}
 #fav.on{color:var(--on)}
-#bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line)}
-.tab{-webkit-flex:none;flex:none;padding:8px 14px;border-radius:18px;margin-right:8px;color:var(--dim)}
-.tab.on{background:var(--acc);color:#3c3a38}
-#q{-webkit-flex:1;flex:1;min-width:0;margin:0 10px;padding:9px 14px;border-radius:18px;border:0;background:#2e2d2c;color:var(--txt);font:inherit;-webkit-user-select:text;user-select:text}
-#add{display:block;-webkit-flex:none;flex:none;font-size:26px;width:40px;height:40px;line-height:38px;text-align:center;border-radius:50%;background:#2e2d2c}
-#genres{display:-webkit-flex;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 20px 4px;white-space:nowrap}
-.g{-webkit-flex:none;flex:none;padding:5px 12px;margin-right:8px;border-radius:14px;border:1px solid var(--line);color:var(--dim);font-size:14px}
+
+/* панель поиска и жанры */
+#bar{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:10px 18px;border-bottom:1px solid var(--line);-webkit-flex:none;flex:none}
+#vt{font-size:20px;font-weight:700;-webkit-flex:none;flex:none;margin-right:14px}
+#q{-webkit-flex:1;flex:1;min-width:0;padding:9px 14px;border-radius:18px;border:0;background:var(--field);color:var(--txt);font:inherit;-webkit-user-select:text;user-select:text;-webkit-appearance:none}
+#act{display:block;-webkit-flex:none;flex:none;margin-left:10px;height:38px;line-height:38px;padding:0 16px;border-radius:19px;background:var(--btn);color:var(--btnt);font-size:15px}
+#genres{-webkit-flex:none;flex:none;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 18px 4px;white-space:nowrap}
+.g{display:inline-block;padding:0 12px;height:30px;line-height:28px;margin-right:8px;border-radius:15px;border:1px solid var(--line);color:var(--dim);font-size:14px}
 .g.on{border-color:var(--acc);color:var(--txt)}
-#list{-webkit-flex:1;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 12px 30px}
+
+/* списки */
+#list{-webkit-flex:1;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 10px 24px}
 .row{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:8px;border-radius:12px}
 .row.cur{background:var(--panel)}
-.li{width:48px;height:48px;border-radius:10px;background:#2e2d2c center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:14px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-weight:700;color:#8d8985}
+.li{width:48px;height:48px;border-radius:10px;background:var(--field) center/cover no-repeat;-webkit-flex:none;flex:none;margin-right:14px;text-align:center;line-height:48px;font-size:20px;font-weight:700;color:#8d8985;overflow:hidden}
 .rn{-webkit-flex:1;flex:1;min-width:0}
 .rn b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rn i{display:block;font-style:normal;font-size:13px;color:var(--dim)}
 .rf{display:block;-webkit-flex:none;flex:none;font-size:24px;width:44px;height:44px;line-height:44px;text-align:center;color:var(--dim)}
 .rf.on{color:var(--on)}
 .rx{display:block;-webkit-flex:none;flex:none;font-size:18px;width:40px;height:44px;line-height:44px;text-align:center;color:var(--dim)}
-#empty{padding:30px;text-align:center;color:var(--dim)}
-@media (max-width:600px){#logo{width:64px;height:64px;font-size:28px;margin-right:12px}.cb{width:46px;height:46px;margin-left:6px}#pp{width:62px;height:62px}#fav{margin-left:4px}}
-#copy{text-align:center;color:#8d8985;font-size:12px;padding:6px}
+.empty{padding:30px 20px;text-align:center;color:var(--dim);line-height:1.5}
+
+/* настройки */
+.set{max-width:640px;margin:0 auto;padding:10px 8px}
+.sr{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:14px 12px;border-bottom:1px solid var(--line)}
+.sr .t{-webkit-flex:1;flex:1;min-width:0}
+.sr .t small{display:block;color:var(--dim);font-size:13px;margin-top:3px}
+.sw{position:relative;display:block;-webkit-flex:none;flex:none;width:52px;height:32px;border-radius:16px;background:var(--line)}
+.sw:after{content:"";position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;-webkit-transition:left .15s;transition:left .15s}
+.sw.on{background:#4cd964}
+.sw.on:after{left:23px}
+.sb{display:block;-webkit-flex:none;flex:none;height:36px;line-height:36px;padding:0 14px;border-radius:18px;background:var(--btn);color:var(--btnt);font-size:14px}
+.note{padding:14px 12px;color:var(--dim);font-size:14px;line-height:1.5}
+#copy{text-align:center;color:#8d8985;font-size:15px;padding:18px 6px 6px}
+
+@media (max-width:700px){
+  #rail{width:72px}.nav{width:64px;height:64px}.nav .ic{font-size:24px;line-height:28px;padding-top:7px}.nav .lb{font-size:10px;margin-top:2px}
+  #logo{width:60px;height:60px;line-height:60px;font-size:26px;margin-right:10px}
+  .cb{width:44px;height:44px;margin-left:6px}#pp{width:58px;height:58px}#pp svg{width:30px;height:30px;margin:-15px 0 0 -15px}
+  #fav{width:38px}#sn{font-size:19px}#tr{font-size:15px}#vt{display:none}
+}
 </style>
 </head>
 <body>
-<div id="np">
-  <div id="logo"></div>
-  <div id="info"><div id="sn">PodRadio</div><div id="tr">Выберите станцию</div><div id="st"></div></div>
-  <div id="ctl">
-    <button id="fav" aria-label="Избранное">☆</button>
-    <button class="cb" id="prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
-    <button class="cb" id="pp" aria-label="Пуск"></button>
-    <button class="cb" id="next" aria-label="Следующая"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zM16 6h2v12h-2z"/></svg></button>
+<div id="rail">
+  <button class="nav on" data-v="all"><span class="ic">📻</span><span class="lb">Станции</span></button>
+  <button class="nav" data-v="fav"><span class="ic">★</span><span class="lb">Избранное</span></button>
+  <button class="nav" data-v="files"><span class="ic">📁</span><span class="lb">Папка</span></button>
+  <button class="nav" data-v="find"><span class="ic">🔍</span><span class="lb">Поиск</span></button>
+  <button class="nav" data-v="add"><span class="ic">＋</span><span class="lb">Добавить</span></button>
+  <button class="nav" data-v="set"><span class="ic">⚙</span><span class="lb">Настройки</span></button>
+</div>
+<div id="main">
+  <div id="np">
+    <div id="logo"></div>
+    <div id="info"><div id="sn">PodRadio</div><div id="tr">Выберите станцию</div><div id="st"></div></div>
+    <div id="ctl">
+      <button id="fav" aria-label="Избранное">☆</button>
+      <button class="cb" id="prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
+      <button class="cb" id="pp" aria-label="Пуск"></button>
+      <button class="cb" id="next" aria-label="Следующая"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zM16 6h2v12h-2z"/></svg></button>
+    </div>
   </div>
+  <div id="bar"><span id="vt">Станции</span><input id="q" type="search" placeholder="Поиск" autocomplete="off"><button id="act"></button></div>
+  <div id="genres"></div>
+  <div id="list"></div>
 </div>
-<div id="bar">
-  <button class="tab on" data-v="all">Станции</button>
-  <button class="tab" data-v="fav">Избранное</button>
-  <input id="q" type="search" placeholder="Поиск" autocomplete="off">
-  <button id="add" aria-label="Добавить станцию">+</button>
-</div>
-<div id="genres"></div>
-<div id="list"></div>
-<div id="copy">© Запольский Андрей</div>
 <script src="stations.js"></script>
 <script>
 (function(){
 "use strict";
 var PLAY='<svg viewBox="0 0 24 24"><path d="M6.5 5l11 7-11 7z"/></svg>',PAUSE='<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+var TITLES={all:"Станции",fav:"Избранное",files:"Папка",set:"Настройки"};
 function $(s){return document.querySelector(s)}
 function load(k,d){try{var v=localStorage.getItem("pr_"+k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem("pr_"+k,JSON.stringify(v))}catch(e){}}
 function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function post(m){try{window.webkit.messageHandlers.rrn.postMessage(m)}catch(e){}}
+function up(el,sel){while(el&&el.nodeType===1){if(el.matches?el.matches(sel):el.webkitMatchesSelector(sel))return el;el=el.parentNode}return null}
 
-var own=load("own",[]),favs=load("favs",[]),view="all",genre="Все",q="",cur=load("last",""),state="stop",track="";
+var S=load("set",{light:false,genres:true});
+var own=load("own",[]),favs=load("favs",[]),view="all",genre="Все",q="",cur=load("last",""),state="stop",track="",files=[];
+/* cur: адрес станции или "file:имя" для своего файла */
+function isFile(k){return k&&k.indexOf("file:")===0}
+function fname(k){return k.slice(5)}
+function ftitle(n){return n.replace(/\.[^.]+$/,"")}
 function all(){return own.concat(DEF)}
 function byUrl(u){var a=all();for(var i=0;i<a.length;i++)if(a[i].u===u)return a[i];return null}
 function isFav(u){return favs.indexOf(u)>=0}
-function shown(){
+function stations(){
   var a=all(),out=[],ql=q.toLowerCase();
   for(var i=0;i<a.length;i++){var s=a[i];
     if(view==="fav"&&!isFav(s.u))continue;
@@ -92,59 +136,118 @@ function shown(){
     out.push(s)}
   return out;
 }
+function fileList(){var ql=q.toLowerCase();return files.filter(function(f){return !ql||f.name.toLowerCase().indexOf(ql)>=0})}
 /* логотип: картинка, а если не загрузилась (например, webp на iOS 10) — первая буква */
-function setLogo(el,s){
-  el.style.backgroundImage="";el.textContent=(s&&s.n?s.n.charAt(0).toUpperCase():"");
+function setLogo(el,s,ch){
+  el.style.backgroundImage="";el.textContent=ch||(s&&s.n?s.n.charAt(0).toUpperCase():"");
   if(!s||!s.l||/\.webp(\?|$)/i.test(s.l))return;
   var im=new Image();im.onload=function(){el.style.backgroundImage='url("'+s.l.replace(/"/g,"%22")+'")';el.textContent=""};im.src=s.l;
 }
+
+function renderRail(){
+  var ns=document.querySelectorAll(".nav");
+  for(var i=0;i<ns.length;i++)ns[i].className="nav"+(ns[i].getAttribute("data-v")===view?" on":"");
+}
+function renderBar(){
+  var set=view==="set";
+  $("#bar").style.display=set?"none":"";
+  $("#vt").textContent=TITLES[view]||"";
+  $("#q").placeholder=view==="files"?"Поиск по файлам":"Поиск станции";
+  var a=$("#act");
+  if(view==="files"){a.style.display="";a.textContent="Добавить файл"}
+  else if(view==="all"){a.style.display="";a.textContent="+ Станция"}
+  else a.style.display="none";
+}
 function renderGenres(){
+  var g=$("#genres");
+  if(!S.genres||(view!=="all"&&view!=="fav")){g.style.display="none";return}
+  g.style.display="";
   var set={"Все":1},a=all(),h="";
   for(var i=0;i<a.length;i++)set[a[i].g||"Без жанра"]=1;
-  Object.keys(set).forEach(function(g){h+='<button class="g'+(g===genre?" on":"")+'" data-g="'+esc(g)+'">'+esc(g)+'</button>'});
-  $("#genres").innerHTML=h;
+  Object.keys(set).forEach(function(x){h+='<button class="g'+(x===genre?" on":"")+'" data-g="'+esc(x)+'">'+esc(x)+'</button>'});
+  g.innerHTML=h;
 }
 function renderList(){
-  var a=shown(),h="";
-  for(var i=0;i<a.length;i++){var s=a[i],o=own.some(function(x){return x.u===s.u});
+  var L=$("#list"),h="";
+  if(view==="set"){L.innerHTML=settingsHtml();return}
+  if(view==="files"){
+    var fl=fileList();
+    for(var i=0;i<fl.length;i++){var f=fl[i],k="file:"+f.name;
+      h+='<div class="row'+(k===cur?" cur":"")+'" data-u="'+esc(k)+'"><div class="li">♪</div><div class="rn"><b>'+esc(ftitle(f.name))+'</b><i>'+(f.size/1048576).toFixed(1)+' МБ</i></div><button class="rx" data-x="1">✕</button></div>'}
+    L.innerHTML=h||'<div class="empty">Здесь будут ваши песни.<br>Нажмите «Добавить файл» или скопируйте музыку через iTunes на компьютере: iPad → Общие файлы → PodRadio.</div>';
+    return;
+  }
+  var a=stations();
+  for(var j=0;j<a.length;j++){var s=a[j],o=own.some(function(x){return x.u===s.u});
     h+='<div class="row'+(s.u===cur?" cur":"")+'" data-u="'+esc(s.u)+'"><div class="li"></div><div class="rn"><b>'+esc(s.n)+'</b><i>'+esc(s.g||"")+'</i></div>'+
       '<button class="rf'+(isFav(s.u)?" on":"")+'" data-f="1">'+(isFav(s.u)?"★":"☆")+'</button>'+(o?'<button class="rx" data-x="1">✕</button>':"")+'</div>'}
-  $("#list").innerHTML=h||'<div id="empty">'+(view==="fav"?"В избранном пока пусто: нажмите ☆ у станции":"Ничего не найдено")+'</div>';
-  var rows=document.querySelectorAll("#list .row");
-  for(var j=0;j<rows.length;j++)setLogo(rows[j].querySelector(".li"),byUrl(rows[j].getAttribute("data-u")));
+  L.innerHTML=h||'<div class="empty">'+(view==="fav"?"В избранном пока пусто: нажмите ☆ у станции":"Ничего не найдено")+'</div>';
+  var rows=L.querySelectorAll(".row");
+  for(var r=0;r<rows.length;r++)setLogo(rows[r].querySelector(".li"),byUrl(rows[r].getAttribute("data-u")));
+}
+function sw(k){return '<button class="sw'+(S[k]?" on":"")+'" data-s="'+k+'"></button>'}
+function settingsHtml(){
+  return '<div class="set">'+
+    '<div class="sr"><div class="t">Светлое оформление<small>Тёмное или светлое</small></div>'+sw("light")+'</div>'+
+    '<div class="sr"><div class="t">Жанры над списком<small>Кнопки фильтра по жанру</small></div>'+sw("genres")+'</div>'+
+    '<div class="sr"><div class="t">Мои станции<small>Добавлено: '+own.length+'</small></div><button class="sb" data-a="delown">Удалить все</button></div>'+
+    '<div class="sr"><div class="t">Избранное<small>Станций: '+favs.length+'</small></div><button class="sb" data-a="delfav">Очистить</button></div>'+
+    '<div class="note">Свои песни для «Папки»: подключите iPad к компьютеру, откройте iTunes → iPad → Общие файлы → PodRadio и перетащите туда mp3 или m4a. Или нажмите «Добавить файл» в «Папке».</div>'+
+    '<div class="note">PodRadio Lite 1.2 для iOS 10</div>'+
+    '<div id="copy">© Запольский Андрей</div></div>';
 }
 function renderNP(){
-  var s=byUrl(cur);
-  $("#sn").textContent=s?s.n:"PodRadio";
-  $("#tr").textContent=track||(s?(s.g||"Интернет-радио"):"Выберите станцию");
-  $("#st").textContent={play:"Играет",load:"Подключение…",err:"Поток недоступен",stop:s?"Пауза":""}[state]||"";
+  var s=null,name="PodRadio",sub="Выберите станцию";
+  if(isFile(cur)){name=ftitle(fname(cur));sub="Свой файл"}
+  else{s=byUrl(cur);if(s){name=s.n;sub=s.g||"Интернет-радио"}}
+  $("#sn").textContent=name;
+  $("#tr").textContent=track||sub;
+  $("#st").textContent={play:"Играет",load:"Подключение…",err:isFile(cur)?"Файл не воспроизводится":"Поток недоступен",stop:cur?"Пауза":""}[state]||"";
   $("#pp").innerHTML=(state==="play"||state==="load")?PAUSE:PLAY;
-  var f=$("#fav");f.textContent=s&&isFav(s.u)?"★":"☆";f.className=s&&isFav(s.u)?"on":"";
-  setLogo($("#logo"),s);
+  var f=$("#fav");f.style.visibility=isFile(cur)?"hidden":"visible";
+  f.textContent=s&&isFav(s.u)?"★":"☆";f.className=s&&isFav(s.u)?"on":"";
+  setLogo($("#logo"),s,isFile(cur)?"♪":"");
 }
-function render(){renderGenres();renderList();renderNP()}
+function render(){document.body.className=S.light?"light":"";renderRail();renderBar();renderGenres();renderList();renderNP()}
 
-function playUrl(u){
-  var s=byUrl(u);if(!s)return;
-  cur=u;save("last",u);track="";state="load";
-  post({cmd:"play",url:s.u,title:s.n,genre:s.g||""});
+function playKey(k){
+  cur=k;save("last",k);track="";state="load";
+  if(isFile(k)){var n=fname(k);post({cmd:"playFile",name:n,title:ftitle(n)})}
+  else{var s=byUrl(k);if(!s)return;post({cmd:"play",url:s.u,title:s.n,genre:s.g||""})}
   renderNP();renderList();
 }
 function toggle(){
-  if(!cur){var a=shown();if(a.length)playUrl(a[0].u);return}
+  if(!cur){var a=view==="files"?fileList():stations();if(a.length)playKey(view==="files"?"file:"+a[0].name:a[0].u);return}
   if(state==="play"||state==="load"){post({cmd:"pause"});state="stop";renderNP()}
-  else playUrl(cur);
+  else playKey(cur);
 }
 function step(d){
-  var a=shown();if(!a.length)a=all();
-  var i=-1;for(var k=0;k<a.length;k++)if(a[k].u===cur)i=k;
-  playUrl(a[(i+d+a.length)%a.length].u);
+  var keys;
+  if(isFile(cur)){keys=files.map(function(f){return "file:"+f.name})}
+  else{var a=stations();if(!a.length||(cur&&!a.some(function(x){return x.u===cur})))a=all();keys=a.map(function(x){return x.u})}
+  if(!keys.length)return;
+  var i=keys.indexOf(cur);
+  playKey(keys[(i+d+keys.length)%keys.length]);
 }
-function favToggle(u){var i=favs.indexOf(u);if(i>=0)favs.splice(i,1);else favs.push(u);save("favs",favs);render()}
+function favToggle(u){var i=favs.indexOf(u);if(i>=0)favs.splice(i,1);else favs.push(u);save("favs",favs);renderList();renderNP()}
+function addStation(){
+  var u=prompt("Ссылка на поток (http/https, mp3, aac или m3u8):","");if(!u)return;u=u.trim();
+  if(!/^https?:\/\//i.test(u)){alert("Нужна ссылка, начинающаяся с http:// или https://");return}
+  var n=prompt("Название станции:","")||u.replace(/^https?:\/\//i,"").split("/")[0];
+  own.unshift({n:n,u:u,g:"Мои",l:""});save("own",own);view="all";genre="Все";render();
+}
+function go(v){
+  if(v==="find"){if(view!=="all"&&view!=="fav"&&view!=="files")go("all");$("#q").focus();return}
+  if(v==="add"){if(view==="files")post({cmd:"pick"});else addStation();return}
+  view=v;q="";$("#q").value="";if(v==="files")post({cmd:"files"});
+  render();$("#list").scrollTop=0;
+}
 
-/* вызовы из приложения: состояние плеера, название трека, кнопки экрана блокировки и наушников */
+/* вызовы из приложения: состояние плеера, трек, свои файлы, кнопки экрана блокировки и наушников */
 window.rrnState=function(s){state=s;renderNP()};
 window.rrnTrack=function(t){track=t||"";renderNP();post({cmd:"np",title:track})};
+window.rrnFiles=function(a){files=a||[];if(isFile(cur)&&!files.some(function(f){return "file:"+f.name===cur})&&state!=="play"){cur="";state="stop";renderNP()}if(view==="files")renderList()};
+window.rrnEnded=function(){if(isFile(cur))step(1)};
 window.rrnKey=function(k){
   if(k==="toggle")toggle();
   else if(k==="play"){if(state!=="play"&&state!=="load")toggle()}
@@ -155,24 +258,28 @@ window.rrnKey=function(k){
 $("#pp").onclick=toggle;
 $("#prev").onclick=function(){step(-1)};
 $("#next").onclick=function(){step(1)};
-$("#fav").onclick=function(){if(cur)favToggle(cur)};
-$("#bar").onclick=function(e){var t=e.target.closest?e.target.closest(".tab"):null;if(!t)return;view=t.getAttribute("data-v");
-  var ts=document.querySelectorAll(".tab");for(var i=0;i<ts.length;i++)ts[i].className="tab"+(ts[i]===t?" on":"");renderList()};
-$("#genres").onclick=function(e){var g=e.target.getAttribute("data-g");if(g){genre=g;renderGenres();renderList()}};
+$("#fav").onclick=function(){if(cur&&!isFile(cur))favToggle(cur)};
+$("#rail").onclick=function(e){var b=up(e.target,".nav");if(b)go(b.getAttribute("data-v"))};
+$("#act").onclick=function(){if(view==="files")post({cmd:"pick"});else addStation()};
+$("#genres").onclick=function(e){var b=up(e.target,".g");if(b){genre=b.getAttribute("data-g");renderGenres();renderList()}};
 $("#q").oninput=function(){q=this.value;renderList()};
 $("#list").onclick=function(e){
-  var r=e.target.closest?e.target.closest(".row"):null;if(!r)return;var u=r.getAttribute("data-u");
-  if(e.target.getAttribute("data-f")){favToggle(u);return}
-  if(e.target.getAttribute("data-x")){if(confirm("Удалить станцию?")){own=own.filter(function(x){return x.u!==u});save("own",own);if(cur===u){post({cmd:"pause"});cur="";state="stop"}render()}return}
+  var t=e.target,sw=up(t,".sw"),sb=up(t,".sb");
+  if(sw){var k=sw.getAttribute("data-s");S[k]=!S[k];save("set",S);render();return}
+  if(sb){var a=sb.getAttribute("data-a");
+    if(a==="delown"&&own.length&&confirm("Удалить все свои станции?")){if(byUrl(cur)&&own.some(function(x){return x.u===cur})){post({cmd:"pause"});cur="";state="stop"}own=[];save("own",own);render()}
+    if(a==="delfav"&&favs.length&&confirm("Очистить избранное?")){favs=[];save("favs",favs);render()}
+    return}
+  var r=up(t,".row");if(!r)return;var u=r.getAttribute("data-u");
+  if(up(t,".rf")){favToggle(u);return}
+  if(up(t,".rx")){
+    if(isFile(u)){if(confirm("Удалить файл с iPad?")){if(u===cur){post({cmd:"pause"});cur="";state="stop";renderNP()}post({cmd:"delFile",name:fname(u)})}}
+    else if(confirm("Удалить станцию?")){own=own.filter(function(x){return x.u!==u});save("own",own);if(cur===u){post({cmd:"pause"});cur="";state="stop"}render()}
+    return}
   if(u===cur&&(state==="play"||state==="load"))return;
-  playUrl(u);
+  playKey(u);
 };
-$("#add").onclick=function(){
-  var u=prompt("Ссылка на поток (http/https, mp3, aac или m3u8):","");if(!u)return;u=u.trim();
-  if(!/^https?:\/\//i.test(u)){alert("Нужна ссылка, начинающаяся с http:// или https://");return}
-  var n=prompt("Название станции:","")||u.replace(/^https?:\/\//i,"").split("/")[0];
-  own.unshift({n:n,u:u,g:"Мои",l:""});save("own",own);render();
-};
+if(isFile(cur))post({cmd:"files"});
 render();
 })();
 </script>

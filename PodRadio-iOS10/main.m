@@ -6,7 +6,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface PlayerVC : UIViewController <WKScriptMessageHandler, WKUIDelegate, WKNavigationDelegate>
+@interface PlayerVC : UIViewController <WKScriptMessageHandler, WKUIDelegate, WKNavigationDelegate, UIDocumentPickerDelegate>
+- (void)importFile:(NSURL *)src;
 @end
 
 @implementation PlayerVC {
@@ -68,7 +69,60 @@
     } else if ([cmd isEqualToString:@"np"]) {
         track = d[@"title"] ?: @"";
         [self nowPlaying];
+    } else if ([cmd isEqualToString:@"playFile"]) {
+        NSString *name = [d[@"name"] lastPathComponent];
+        if (!name.length) return;
+        station = d[@"title"] ?: name;
+        track = @"";
+        retries = 0;
+        [self play:[NSURL fileURLWithPath:[[self docs] stringByAppendingPathComponent:name]].absoluteString];
+    } else if ([cmd isEqualToString:@"files"]) {
+        [self sendFiles];
+    } else if ([cmd isEqualToString:@"delFile"]) {
+        NSString *name = [d[@"name"] lastPathComponent];
+        if (name.length) [[NSFileManager defaultManager] removeItemAtPath:[[self docs] stringByAppendingPathComponent:name] error:nil];
+        [self sendFiles];
+    } else if ([cmd isEqualToString:@"pick"]) {
+        UIDocumentPickerViewController *p = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
+        p.delegate = self;
+        p.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:p animated:YES completion:nil];
     }
+}
+
+#pragma mark - свои файлы («Папка»): папка «Документы» приложения, её видно и в iTunes на компьютере
+
+- (NSString *)docs {
+    return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+}
+
+- (void)sendFiles {
+    NSArray *ext = @[@"mp3", @"m4a", @"aac", @"wav", @"aif", @"aiff", @"caf", @"mp4", @"m4b", @"flac"];
+    NSMutableArray *out = [NSMutableArray new];
+    NSArray *names = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self docs] error:nil]
+                      sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
+    for (NSString *n in names) {
+        if (![ext containsObject:n.pathExtension.lowercaseString]) continue;
+        NSDictionary *a = [[NSFileManager defaultManager] attributesOfItemAtPath:[[self docs] stringByAppendingPathComponent:n] error:nil];
+        [out addObject:@{@"name": n, @"size": @([a fileSize])}];
+    }
+    NSData *j = [NSJSONSerialization dataWithJSONObject:out options:0 error:nil];
+    [self js:[NSString stringWithFormat:@"window.rrnFiles&&rrnFiles(%@)", [[NSString alloc] initWithData:j encoding:NSUTF8StringEncoding]]];
+}
+
+- (void)importFile:(NSURL *)src {
+    NSString *name = src.lastPathComponent;
+    NSString *dst = [[self docs] stringByAppendingPathComponent:name];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    for (int k = 2; [fm fileExistsAtPath:dst]; k++)
+        dst = [[self docs] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@ (%d).%@", name.stringByDeletingPathExtension, k, name.pathExtension]];
+    if (![fm moveItemAtURL:src toURL:[NSURL fileURLWithPath:dst] error:nil])
+        [fm copyItemAtURL:src toURL:[NSURL fileURLWithPath:dst] error:nil];
+    [self sendFiles];
+}
+
+- (void)documentPicker:(UIDocumentPickerViewController *)c didPickDocumentAtURL:(NSURL *)u {
+    [self importFile:u];
 }
 
 - (void)js:(NSString *)s { [web evaluateJavaScript:s completionHandler:nil]; }
@@ -92,6 +146,7 @@
     [item addObserver:self forKeyPath:@"timedMetadata" options:0 context:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(broken:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:item];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(broken:) name:AVPlayerItemPlaybackStalledNotification object:item];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ended:) name:AVPlayerItemDidPlayToEndTimeNotification object:item];
     if (!player) {
         player = [AVPlayer playerWithPlayerItem:item];
         [player addObserver:self forKeyPath:@"timeControlStatus" options:0 context:nil];
@@ -108,6 +163,14 @@
     [item removeObserver:self forKeyPath:@"timedMetadata"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:item];
     item = nil;
+}
+
+// свой файл доиграл — следующий
+- (void)ended:(NSNotification *)n {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self->url hasPrefix:@"file:"]) [self js:@"window.rrnEnded&&rrnEnded()"];
+        else [self broken:n];
+    });
 }
 
 // обрыв потока: до 3 переподключений
@@ -208,6 +271,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [PlayerVC new];
     [self.window makeKeyAndVisible];
+    return YES;
+}
+
+// «Открыть в PodRadio» из другого приложения: файл попадает в «Папку»
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)u options:(NSDictionary *)o {
+    if (u.isFileURL) [(PlayerVC *)self.window.rootViewController importFile:u];
     return YES;
 }
 @end
