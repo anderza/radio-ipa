@@ -6,7 +6,7 @@ TC=$(cd ${TC:-../tc/linux/iphone/bin} && pwd); SDK=${SDK:-../sdk/iPhoneOS10.3.sd
 rm -rf out && mkdir -p out/Payload/PodRadio.app
 A=out/Payload/PodRadio.app
 for arch in armv7 arm64; do
-  $TC/clang -target $arch-apple-ios10.0 -isysroot $SDK -fobjc-arc -O2 -fuse-ld=$TC/ld \
+  $TC/clang -target $arch-apple-ios10.0 -isysroot $SDK -fobjc-arc -O2 -fno-exceptions -fno-objc-exceptions -fuse-ld=$TC/ld \
     -framework UIKit -framework WebKit -framework AVFoundation -framework MediaPlayer -framework Foundation -framework CoreGraphics \
     main.m -o out/PodRadio.$arch 2> >(grep -v "built for iOS Simulator" >&2)
 done
