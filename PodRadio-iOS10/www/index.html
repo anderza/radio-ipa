@@ -32,6 +32,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
 #st{margin-top:4px;font-size:13px;color:var(--dim)}
 #ctl{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex:none;flex:none;margin-left:10px;white-space:nowrap}
 .cb{position:relative;display:block;-webkit-flex:none;flex:none;width:56px;height:56px;border-radius:50%;background:var(--btn);color:var(--btnt);margin-left:10px;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+#gear{margin-left:14px}
 .cb svg{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;fill:currentColor;display:block}
 #pp{width:78px;height:78px}
 #pp svg{width:36px;height:36px;margin:-18px 0 0 -18px}
@@ -99,6 +100,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cu
       <button class="cb" id="prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/></svg></button>
       <button class="cb" id="pp" aria-label="Пуск"></button>
       <button class="cb" id="next" aria-label="Следующая"><svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6zM16 6h2v12h-2z"/></svg></button>
+      <button class="cb" id="gear" aria-label="Настройки"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.5 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></button>
     </div>
   </div>
   <div id="bar"><span id="vt">Станции</span><input id="q" type="search" placeholder="Поиск" autocomplete="off"><button id="act"></button></div>
@@ -193,7 +195,7 @@ function settingsHtml(){
     '<div class="sr"><div class="t">Мои станции<small>Добавлено: '+own.length+'</small></div><button class="sb" data-a="delown">Удалить все</button></div>'+
     '<div class="sr"><div class="t">Избранное<small>Станций: '+favs.length+'</small></div><button class="sb" data-a="delfav">Очистить</button></div>'+
     '<div class="note">Свои песни для «Папки»: подключите iPad к компьютеру, откройте iTunes → iPad → Общие файлы → PodRadio и перетащите туда mp3 или m4a. Или нажмите «Добавить файл» в «Папке».</div>'+
-    '<div class="note">PodRadio Lite 1.2 для iOS 10</div>'+
+    '<div class="note">PodRadio Lite 1.3 для iOS 10</div>'+
     '<div id="copy">© Запольский Андрей</div></div>';
 }
 function renderNP(){
@@ -202,7 +204,7 @@ function renderNP(){
   else{s=byUrl(cur);if(s){name=s.n;sub=s.g||"Интернет-радио"}}
   $("#sn").textContent=name;
   $("#tr").textContent=track||sub;
-  $("#st").textContent={play:"Играет",load:"Подключение…",err:isFile(cur)?"Файл не воспроизводится":"Поток недоступен",stop:cur?"Пауза":""}[state]||"";
+  $("#st").textContent=({play:"Играет",load:"Подключение…",err:isFile(cur)?"Файл не воспроизводится":"Поток недоступен",stop:cur?"Пауза":""}[state]||"")+"  ·  v1.3";
   $("#pp").innerHTML=(state==="play"||state==="load")?PAUSE:PLAY;
   var f=$("#fav");f.style.visibility=isFile(cur)?"hidden":"visible";
   f.textContent=s&&isFav(s.u)?"★":"☆";f.className=s&&isFav(s.u)?"on":"";
@@ -258,6 +260,7 @@ window.rrnKey=function(k){
 $("#pp").onclick=toggle;
 $("#prev").onclick=function(){step(-1)};
 $("#next").onclick=function(){step(1)};
+$("#gear").onclick=function(){go(view==="set"?"all":"set")};
 $("#fav").onclick=function(){if(cur&&!isFile(cur))favToggle(cur)};
 $("#rail").onclick=function(e){var b=up(e.target,".nav");if(b)go(b.getAttribute("data-v"))};
 $("#act").onclick=function(){if(view==="files")post({cmd:"pick"});else addStation()};
