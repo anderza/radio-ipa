@@ -16,6 +16,7 @@
     AVPlayerItem *item;
     NSString *url, *station, *track;
     BOOL want;          // пользователь хочет, чтобы играло
+    BOOL pickTxt;       // окно выбора открыто для импорта станций из txt
     int retries;
 }
 
@@ -82,7 +83,31 @@
         NSString *name = [d[@"name"] lastPathComponent];
         if (name.length) [[NSFileManager defaultManager] removeItemAtPath:[[self docs] stringByAppendingPathComponent:name] error:nil];
         [self sendFiles];
+    } else if ([cmd isEqualToString:@"pickTxt"]) {
+        if ([self canPick]) {
+            pickTxt = YES;
+            UIDocumentPickerViewController *p = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.plain-text", @"public.text", @"public.m3u-playlist"] inMode:UIDocumentPickerModeImport];
+            p.delegate = self;
+            p.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentViewController:p animated:YES completion:nil];
+        } else {
+            [self chooseDocsTxt];
+        }
+    } else if ([cmd isEqualToString:@"saveTxt"]) {
+        // экспорт: файл в «Документы» (виден в iTunes → Общие файлы) и окно «Поделиться»
+        NSString *path = [[self docs] stringByAppendingPathComponent:@"stations.txt"];
+        [(d[@"text"] ?: @"") writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        UIActivityViewController *a = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:path]] applicationActivities:nil];
+        a.popoverPresentationController.sourceView = self.view;
+        a.popoverPresentationController.sourceRect = CGRectMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 2, 1, 1);
+        a.popoverPresentationController.permittedArrowDirections = 0;
+        [self presentViewController:a animated:YES completion:nil];
     } else if ([cmd isEqualToString:@"pick"]) {
+        if (![self canPick]) {
+            [self say:@"На iOS 10 выбор файлов на iPad недоступен без iCloud. Скопируйте песни через iTunes на компьютере: iPad → Общие файлы → PodRadio. Или откройте песню в другом приложении и выберите «Открыть в PodRadio»."];
+            return;
+        }
+        pickTxt = NO;
         UIDocumentPickerViewController *p = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
         p.delegate = self;
         p.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -110,7 +135,49 @@
     [self js:[NSString stringWithFormat:@"window.rrnFiles&&rrnFiles(%@)", [[NSString alloc] initWithData:j encoding:NSUTF8StringEncoding]]];
 }
 
+// окно выбора документов на iOS 10 без iCloud-разрешения падает (а Sideloadly его не даёт) — там берём файлы из «Документов»
+- (BOOL)canPick {
+    return [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){11, 0, 0}];
+}
+
+- (void)say:(NSString *)msg {
+    UIAlertController *a = [UIAlertController alertControllerWithTitle:nil message:msg preferredStyle:UIAlertControllerStyleAlert];
+    [a addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:a animated:YES completion:nil];
+}
+
+- (void)chooseDocsTxt {
+    NSMutableArray *names = [NSMutableArray new];
+    for (NSString *n in [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self docs] error:nil] sortedArrayUsingSelector:@selector(localizedStandardCompare:)]) {
+        NSString *e = n.pathExtension.lowercaseString;
+        if ([e isEqualToString:@"txt"] || [e isEqualToString:@"m3u"] || [e isEqualToString:@"m3u8"]) [names addObject:n];
+    }
+    if (!names.count) {
+        [self say:@"Положите txt-файл со станциями в iTunes на компьютере: iPad → Общие файлы → PodRadio, затем снова нажмите «Выбрать файл». Или откройте файл в другом приложении (например, в Почте) и выберите «Открыть в PodRadio»."];
+        return;
+    }
+    UIAlertController *a = [UIAlertController alertControllerWithTitle:@"Импорт станций" message:@"Файлы из «Общих файлов» iTunes" preferredStyle:UIAlertControllerStyleAlert];
+    for (NSString *n in names) {
+        [a addAction:[UIAlertAction actionWithTitle:n style:UIAlertActionStyleDefault handler:^(UIAlertAction *x) {
+            [self importTxt:[NSURL fileURLWithPath:[[self docs] stringByAppendingPathComponent:n]] remove:NO];
+        }]];
+    }
+    [a addAction:[UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:a animated:YES completion:nil];
+}
+
+// импорт станций: текст файла (UTF-8, иначе Windows-1251) уходит странице
+- (void)importTxt:(NSURL *)src remove:(BOOL)rm {
+    NSData *data = [NSData dataWithContentsOfURL:src];
+    NSString *t = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
+    if (!t && data) t = [[NSString alloc] initWithData:data encoding:NSWindowsCP1251StringEncoding];
+    if (rm) [[NSFileManager defaultManager] removeItemAtURL:src error:nil];
+    [self js:[NSString stringWithFormat:@"window.rrnImport&&rrnImport(%@)", [self jsStr:t ?: @""]]];
+}
+
 - (void)importFile:(NSURL *)src {
+    NSString *ext = src.pathExtension.lowercaseString;
+    if ([ext isEqualToString:@"txt"] || [ext isEqualToString:@"m3u"] || [ext isEqualToString:@"m3u8"]) { [self importTxt:src remove:YES]; return; }
     NSString *name = src.lastPathComponent;
     NSString *dst = [[self docs] stringByAppendingPathComponent:name];
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -122,7 +189,7 @@
 }
 
 - (void)documentPicker:(UIDocumentPickerViewController *)c didPickDocumentAtURL:(NSURL *)u {
-    [self importFile:u];
+    if (pickTxt) [self importTxt:u remove:YES]; else [self importFile:u];
 }
 
 - (void)js:(NSString *)s { [web evaluateJavaScript:s completionHandler:nil]; }
