@@ -30,7 +30,7 @@ jobs:
         run: |
           set -o pipefail
           bash PodRadio-iOS10/build.sh 2>&1 | grep -v "built for iOS Simulator" | tee build.log || {
-            grep -E "error|Undefined|ld:|No such|not found|cannot" build.log | head -15 | while IFS= read -r l; do echo "::error::$l"; done
+            grep -E -A4 "error|Undefined|ld:|No such|not found|cannot" build.log | head -25 | while IFS= read -r l; do echo "::error::$l"; done
             exit 1; }
           file PodRadio-iOS10/out/Payload/PodRadio.app/PodRadio
           "$TC/otool" -l PodRadio-iOS10/out/PodRadio.armv7 | grep -A3 LC_VERSION_MIN
