@@ -19,4 +19,5 @@ jobs:
       - run: cd podradio-logos && python3 fetch.py stations.txt && cd out && zip -q ../../logos.zip *
       - env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "podradio-logos-${{ github.run_number }}-${{ github.run_attempt }}" logos.zip --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "Логотипы станций PodRadio ${{ github.run_number }}" --notes "Логотипы из stations.txt, 256px PNG, map.json: станция → файл."
+        run: |
+          gh release create "podradio-logos-${{ github.run_number }}-${{ github.run_attempt }}" logos.zip --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "Логотипы станций PodRadio ${{ github.run_number }}" --notes "Логотипы из stations.txt, 256px PNG, map.json — станция и файл."
