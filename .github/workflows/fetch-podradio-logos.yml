@@ -1,0 +1,22 @@
+name: Логотипы станций PodRadio (скачать и уменьшить)
+
+on:
+  push:
+    paths:
+      - "podradio-logos/**"
+      - ".github/workflows/fetch-podradio-logos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install pillow
+      - run: cd podradio-logos && python3 fetch.py stations.txt && cd out && zip -q ../../logos.zip *
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "podradio-logos-${{ github.run_number }}-${{ github.run_attempt }}" logos.zip --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "Логотипы станций PodRadio ${{ github.run_number }}" --notes "Логотипы из stations.txt, 256px PNG, map.json: станция → файл."

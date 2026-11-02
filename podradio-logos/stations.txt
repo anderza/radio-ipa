@@ -1,0 +1,146 @@
+absolute radio | https://edge59.live-sm.absolutradio.de/absolut-rock/stream/mp3 | Rock | https://static.mytuner.mobi/media/tvos_radios/612/absolute-radio.ace4fac7.png
+rock ballads | https://icecast-piterfm.cdnvideo.ru/pfm_ballads | Ballads | https://radio-online.ru/uploads/posts/radio/1/rock-ballady.png
+standup women | https://srv02.gpmradio.ru:8443/stream/pro/aac/64/448?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiI3OWY3YjA2ZjdlOWYwNjFmZmQyNTQ5YzJhMWQ3ZjQyYSIsIklQIjoiOTMuODUuMTcwLjEzNCIsIlVBIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEyOC4wLjAuMCBZYUJyb3dzZXIvMjQuMTAuMC4wIFNhZmFyaS81MzcuMzYiLCJSZWYiOiJodHRwczovLzEwMS5ydS8iLCJ1aWRfY2hhbm5lbCI6IjQ0OCIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJ0eXBlRGV2aWNlIjoiUEMiLCJCcm93c2VyIjoiQ2hyb21lIiwiQnJvd3NlclZlcnNpb24iOiIxMjguMC4wLjAiLCJTeXN0ZW0iOiJXaW5kb3dzIDEwIiwiZXhwIjoxNzMyODY1NDI0fQ.dHsRJ_sN-Wj7Yc0tjgYlRdUWtMNxdtDczTRfJ6fFWF8 | Юмор | https://kinogo.biz/uploads/mini/shortphone/b62/5b9c568d305e365b5865c38d525a3.webp
+humor fm | https://live.humorfm.by:8443/veseloe | Юмор | https://onlayn-radio.ru/uploads/posts/2024-03/humor-fm.png
+GorodFM | https://stream2.datacenter.by/GorodFM | Pop | https://onlayn-radio.ru/uploads/posts/2023-09/gorodfm977.jpg
+HitroeRadio | https://stream.hitroe.com:8443/stream | Rock | https://onlayn-radio.ru/uploads/posts/2021-12/378_v2.png
+AvtoRadio | https://live.humorfm.by:8443/avtoradio | Rock | https://onlayn-radio.ru/uploads/posts/2025-02/avtoradioby.jpg
+МастераБеларуси | https://listen3.myradio24.com/vladyka | Rock | https://www.radiobells.com/stations/masterabelarusi.webp
+СвойСтиль | https://stream.laut.fm/svoystil | Rock | https://www.radiobells.com/stations/ssenrock.webp
+Неслучайное | https://aska.ru-hoster.com:8006/stream | Рок | https://www.radiobells.com/stations/nesrock.webp
+70xRock | https://jfm1.hostingradio.ru:14536/rock70.mp3 | Rock | https://radio-24.ru/img/logo/logo-523.png
+PunkForever | https://eu6.fastcast4u.com/proxy/pnd?mp=/stream | Rock | https://radio-24.ru/img/logo/logo-2374.png
+AplusRock | https://s.aplus.fm/aplus_rock_64 | Rock | https://radio-24.ru/img/logo/logo-864.jpg
+Metal | https://abs.zaycev.fm/metal128k | Rock | https://radio-24.ru/img/logo/logo-1249.png
+Ultra | https://nashe1.hostingradio.ru/ultra-256 | Rock | https://www.radiobells.com/stations/ultraplayradio.webp
+Underground | https://listen8.myradio24.com/90669 | Rock | https://cdn-profiles.tunein.com/s290266/images/logog.png?t=1680479811000
+Eurodance | https://listen9.myradio24.com/5967 | Pop | https://radiopotok.ru/f/station_webp/512/893.webp
+MetalHammer | https://metal-hammer.stream.laut.fm/metal-hammer | Rock | https://onlayn-radio.ru/uploads/posts/2021-09/1631086804_c300eca666f72a1eeb21a51f58616522.jpg
+Rock95 | https://cob-ais.leanstream.co/CFJBFM | Rock | https://onlayn-radio.ru/uploads/posts/2021-04/1617346842_0e84e56f36c9d389a68bc01cb6d59a04.jpg
+PolygonFm | https://eu6.fastcast4u.com/proxy/polygonf?mp=/stream | Rock | https://www.radiobells.com/stations/polygonfm.webp
+Король и шут | https://srv01.gpmradio.ru/stream/pro/aac/64/191 | Рок | https://www.radiobells.com/stations/korolishutradio.webp
+Наше Радио | https://nashe1.hostingradio.ru/nashe-256 | Рок | https://www.radiobells.com/stations/nashe.webp
+Искатель | https://iskatel.hostingradio.ru:8015/iskatel-128.mp3 | Рок | https://www.radiobells.com/stations/radioiskatel.webp
+Русский рок | https://rr-russkijrok.hostingradio.ru/russkijrok96.aacp | Рок | https://www.radiobells.com/stations/rusradiorock.webp
+РУРок | https://rock.amgradio.ru/rusrock.aacp?r_bells | Рок | https://www.radiobells.com/stations/makradiorusrock.webp
+RockRadio | https://radiorecord.hostingradio.ru/rock96.aacp | Рок | https://www.radiobells.com/stations/recordrock.webp
+AngelRadio | https://listen6.myradio24.com/angels | Рок | https://www.radiobells.com/stations/angelsradio.webp
+MotoRadio | https://stream.motoradio.online/high-mp3 | Rock | https://www.radiobells.com/stations/motoradio.webp
+Nashe2.0 | https://nashe1.hostingradio.ru:18000/nashe20-128.mp3 | Рок | https://www.radiobells.com/stations/nashe20.webp
+AlexFM | https://listen6.myradio24.com/2411 | Rock | https://www.radiobells.com/stations/alexfm.webp
+RockTime | https://a9.radioheart.ru:9049/rocktime | Rock | https://www.radiobells.com/stations/rocktimeradio.webp
+LinkinPark | https://maximum-linkinpark.hostingradio.ru/linkinpark96.aacp | Rock | https://www.radiobells.com/stations/maximumlinkinpark.webp
+PopRock | https://stream.popfm-bir.ru:1115/stream | Pop | https://www.radiobells.com/stations/popfmrock.webp
+УлетайРадио | https://listen8.myradio24.com/ahmedz | Рок | https://www.radiobells.com/stations/uletayradio.webp
+Wow Music Rock | https://stream.vyshka24.ru/wowrock | Rock | https://www.radiobells.com/stations/wowmusicrock.webp
+Rock'N'Roll FM | https://a6.radioheart.ru:9046/RH1972 | Rock | https://www.radiobells.com/stations/rocknrollfm.webp
+Radio Cafe | https://cafe.amgradio.ru/cafe.aacp?r_bells | Pop | https://www.radiobells.com/stations/makradiocafe.webp
+Comedy Radio Comedy Club | https://srv01.gpmradio.ru/stream/pro/aac/64/446? | Юмор | https://www.radiobells.com/stations/comediradiocomedyclub.webp
+Сплин | https://srv01.gpmradio.ru/stream/pro/aac/64/129 | Рок | https://radio-online.ru/uploads/posts/radio/1/splin-101ru.jpg
+ПаркГорького | https://srv01.gpmradio.ru/stream/pro/aac/64/182 | Рок | https://radio-online.ru/uploads/posts/radio/1/park-gorkogo-101ru.jpg
+BIKER-FM | https://listen8.myradio24.com/69846 | Rock | https://radiopotok.ru/f/station_webp/512/2286.webp
+ROCK СТАНЦИЯ | https://rockstation.radiostream.pro/mp3 |  | https://radiopotok.ru/f/station_webp/512/1650.webp
+StandUP | https://srv01.gpmradio.ru/stream/pro/aac/64/447?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJmYWVjZTFjNDk1MDNhMjNlYmIzZmM0MGU3ZGYyMGRlNyIsIklQIjoiMzcuMjE0LjU3LjE4NiIsIlVBIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2IE9QUi8xMzcuMC4wLjAiLCJSZWYiOiJodHRwczovLzEwMS5ydS8iLCJ1aWRfY2hhbm5lbCI6IjQ0NyIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJ0eXBlRGV2aWNlIjoiUEMiLCJCcm93c2VyIjoiQ2hyb21lIiwiQnJvd3NlclZlcnNpb24iOiIxNTMuMC4wLjAiLCJTeXN0ZW0iOiJXaW5kb3dzIDEwIiwiZXhwIjoxNzkyMDM1MzQ0fQ.wRqxb8G-KKDtdaj5qvUbT-UIzoBJo6jus0Ctu3QrtiA | Юмор | https://101.ru/proxy/vardata/modules/musicdb/files/202601/04/5ee2d621e3493b6202930391055c2c0a.jpeg?w=300&h=300&pos=center&q=100&t=1768914473
+Кино | https://srv01.gpmradio.ru/stream/pro/aac/64/103?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiJmYWVjZTFjNDk1MDNhMjNlYmIzZmM0MGU3ZGYyMGRlNyIsIklQIjoiMzcuMjE0LjU3LjE4NiIsIlVBIjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2IE9QUi8xMzcuMC4wLjAiLCJSZWYiOiJodHRwczovLzEwMS5ydS8iLCJ1aWRfY2hhbm5lbCI6IjEwMyIsInR5cGVfY2hhbm5lbCI6ImNoYW5uZWwiLCJ0eXBlRGV2aWNlIjoiUEMiLCJCcm93c2VyIjoiQ2hyb21lIiwiQnJvd3NlclZlcnNpb24iOiIxNTMuMC4wLjAiLCJTeXN0ZW0iOiJXaW5kb3dzIDEwIiwiZXhwIjoxNzkyMDM1NDUyfQ.Xot65MutMKTcOhggYzD_Y-UUjasj74samNfhKgVSZQE | Рок | https://101.ru/proxy/vardata/modules/musicdb/files/201608/33/028576f598fa0a2b97d39beb0babd14b.jpg?w=300&h=300&pos=center&q=100&t=1471708039
+RadioRocks | https://online.radioroks.ua/RadioROKS_Ballads_HD | Ballads | https://radiohub.ru/img/logos/radio-roks-ballads.webp?v=tm99iq
+Нормальное Радио | https://listen8.myradio24.com/71400 | Рок | https://radiohub.ru/img/logos/normalnoe.webp?v=tm47oz
+Port Rock radio | https://lk.castnow.ru/stream/portrock-192.mp3?1769523608558 | Rock | https://radiohub.ru/img/logos/port-rock-radio.webp?v=tm47h1
+80s | https://jfm1.hostingradio.ru:14536/rock80.mp3 | Rock | https://radio-24.ru/img/logo/logo-582.jpg
+90s | https://jfm1.hostingradio.ru:14536/rock90.mp3 | Rock | https://radio-24.ru/img/logo/logo-727.jpg
+Rock FM 00s | https://jfm1.hostingradio.ru:14536/rock00.mp3 | Rock | https://radio-24.ru/img/logo/logo-1142.jpg
+ПитерFM | https://icecast-piterfm.cdnvideo.ru/piterfm | Рок | https://radio-24.ru/img/logo/logo-54.png
+Винтаж | https://lk.castnow.ru/stream/rusvintage-320.mp3 | Pop | https://radiopotok.ru/f/station_webp/512/2601.webp
+Overdrive | https://stream.overdrivelive.net:8000/alternative_128.mp3 | Rock | https://radiopotok.ru/f/station_webp/512/1926.webp
+Comedy | https://gpm.hostingradio.ru/gpm-comedyradio495.aacp | Юмор | https://api.radioplayer.ru/images/lgez3dl0_colored_png.png
+Nostalgy | https://listen7.myradio24.com/alexx333 | Pop | https://wwv.zvuch.com/img/radio/377901_big.jpg
+Dance 80 | https://listen8.myradio24.com/dance80 | Pop | https://wwv.zvuch.com/img/radio/377916_big.jpg
+Классное | https://schoolradio.hostingradio.ru:8026/schoolradio128.mp3 | Pop | https://radiopotok.ru/f/station_webp/512/1754.webp
+Душевное | https://stream2.datacenter.by/dushevnoe | Pop | https://radiopotok.ru/f/station_webp/512/626.webp
+Heavy | https://heavymonday.hostingradio.ru/heavymonday96.aacp | Rock | https://radio-online.ru/uploads/posts/assets/image/radio/180/mamimum-heavy-monday.png
+Soft | https://maximum-soft.hostingradio.ru/maxsoft96.aacp | Rock | https://radio-online.ru/uploads/posts/assets/image/radio/180/soft-radio-maximum.png
+MaximumRock | https://maximusrockfm.stream.laut.fm/maximusrockfm?t302=2026-08-15_08-55-24&uuid=1f364dec-8bf1-497e-893c-22c9179ebb84 | Rock | https://radio-online.ru/uploads/posts/radio/2/430244/3cccaf7e283a5fdda8de60b16d6ffeb9_165x165.webp
+Record 1980 | https://radiorecord.hostingradio.ru/198096.aacp | Pop | https://www.radiobells.com/stations/record80x.webp
+ПИРАТСКОЕ | https://live.rock-wawe.ru:8001/RockWawe | Rock | https://radiopotok.ru/f/station_webp/512/2141.webp
+ussr | https://ic1.radiosignal.one/ussr-mp3 | Рок | https://radiopotok.ru/f/station_webp/512/1960.webp
+Mash | https://mash.stream.laut.fm/mash?ref=web-app | Rock | https://assets.laut.fm/bd9cafc9a0635d0ad667c295b4febe80?t=_120x120
+Punkcommunity | https://punkcommunity.stream.laut.fm/punkcommunity?ref=web-app | Rock | https://assets.laut.fm/530b570c6b2f7878fb11f5bcb6cf3428?t=_640x640
+Nrw Rockt | https://nrwrockt.stream.laut.fm/nrw_rockt?ref=web-app | Rock | https://assets.laut.fm/4ddd7000ec3b378eeb2a2752e594e29e?t=_640x640
+metal | https://listen8.myradio24.com/metalchet | Rock | https://radiopotok.ru/f/station_webp/256/2624.webp
+Alternative X-Rock Station | https://stream.rocksradio.net:1095/stream | Rock | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmZlzOSz75Mhr-cdaiB0B8Krr0yS3Th5xmRLV6Nsu-Kg&s=10
+Bot radio | https://bot-radio.com/bot320 |  | https://onlayn-radio.ru/uploads/posts/2022-10/bot-radio-logo300x300.jpg
+RADIO 1 ROCK | https://play.global.audio/radio1rock.opus | Rock | https://radio-24.ru/img/logo/logo-818.png
+Rock | https://abs.zaycev.fm/rock128k | Rock | https://radio-24.ru/img/logo/logo-390.jpg
+Big "R" Radio - Post Grunge Rock | https://s.fmplay.ru/6fc5dac8 | Rock | https://streams.fmplay.ru/600x600/stations/60869859858ednbg.webp
+Наш классик рок | https://nashe1.hostingradio.ru/nasheclassic.mp3 | Рок | https://www.radiobells.com/stations/nasheradioclassic.webp
+Rock Hits | https://rockhits.hostingradio.ru/rockhits96.aacp |  | https://www.radiobells.com/stations/maximumrockhits.webp
+Ny mercy | https://listen5.myradio24.com/nomercy |  | https://www.radiobells.com/stations/nomercy.webp
+Nevermind | https://listen7.myradio24.com/nevermind |  | https://www.radiobells.com/stations/radionevermind.webp
+Storm winds | https://listen6.myradio24.com/stormwinds |  | https://www.radiobells.com/stations/stormwinds.webp
+Heavy Metal | https://radio.hearme.fm:8260/stream | metal | https://avatars.mds.yandex.net/i?id=31eb98b8b31f6ca5c31901b5e7ce239fa180269a-5259114-images-thumbs&n=13
+Heavy Metal History Radio | https://stream-178.surfernetwork.com/8j4omrwrk2puv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiI4ajRvbXJ3cmsycHV2IiwiaG9zdCI6InN0cmVhbS0xNzguc3VyZmVybmV0d29yay5jb20iLCJydHRsIjo1LCJqdGkiOiJ0MHhVN29zb1JyZVM1SzV3SFBwck5nIiwiaWF0IjoxNzkyOTM3MDM2LCJleHAiOjE3OTI5MzcwOTZ9.4MSZ_H7sN3hrMcPnn3iseWDqwv-TqdntnPvCau1tB3U | metal | https://avatars.mds.yandex.net/i?id=3e5602a7d898ffe7b50e1146174ac965_l-5234866-images-thumbs&n=13
+ROCK & METAL | https://cesarradio.realserver.es/listen/rock_y_metal/radio.mp3 | metal | https://cdn-profiles.tunein.com/s258703/images/logog.jpg?t=1679863628000
+Doc Rock's Metal Shop | https://server5.shoutcasthosting.ie:1185/stream | metal | https://www.buildthescene.com/wp-content/uploads/2025/09/Metal-Shop-101-Logo-transparent.png
+Power Metal | https://stream11.mexiserver.com/proxy/manuel13/stream | metal | https://www.frecuenciamexico.com/imgNueva/thumb__600x300Tu-Punto-Power-Metal.jpg
+Rock The World - Heavy Metal | https://drive.uber.radio/uber/rtwheavymetal/icecast.audio | metal | https://avatars.mds.yandex.net/i?id=4d3438c96c0b71bc156ea7e2d65b1eae_sr-6307799-images-thumbs&n=13
+delta radio Hard Rock & Heavy Metal | https://deltaradio.streamabc.net/regc-deltahardheavy-mp3-128-4714362?sABC=6nqr136o%230%230osqpqo7451o72pr903qn938p2pp43pn%23bayvarenqvbobk&aw_0_1st.playerid=onlineradiobox&amsparams=playerid:onlineradiobox;skey:1792938859 | metal | https://avatars.mds.yandex.net/i?id=281ad5cf8394beb28cab89e27d43ade7_l-5672616-images-thumbs&n=13
+Metal Rock Radio | https://kathy.torontocast.com:2800/; | metal | https://cdn-radiotime-logos.tunein.com/s221762g.png
+Best of Rock FM | https://radio21.streamabc.net/radio21-metal-mp3-192-8866300 | metal | https://i3radio.com/userfiles-aplin/avatars/metal-4403148563.jpg
+97 Underground Radio | https://s6.reliastream.com/proxy/97underground?mp=/stream | metal | https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/8e/cf/10/8ecf10c5-b13d-3740-32c2-ad56c6b635fb/source/512x512bb.jpg
+Loaded Radio | https://s2.radio.co/sad782b7f8/listen | metal | https://www.getmeradio.com/stations/loadedradio-2476/logos/512x512.png
+Z Rock 106.9 | http://zrockkkzr.com:9000/ZRock128k.mp3/; |  | https://cdn-radiotime-logos.tunein.com/s181388g.png
+HardRadio.com | http://144.217.29.205/; | metal | https://hardradio.com/logos/chromedecal250.gif
+Rock Addict Radio | https://das-edge15-live365-dal02.cdnstream.com/a08860 | metal | https://image.live365.com/download/1bd6982d-ee33-482e-9dbe-50bc84893fbe.png/400/image.webp
+MetalRadio | https://radio.hearme.fm:8540/stream | metal | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkteP-nYbyN6YcnIdoNr6fhMyVoZr7dy1Gzp_gBSBjcw&s=10
+MetalZone | https://neos.win:48282/stream | metal | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxCVUsYnJrrpl9HX_ihSvGtuIccwEUSak-MJ5WvUPL-Q&s=10
+Радио 7 | https://radio7.hostingradio.ru:8040/radio7256.mp3 | Pop | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxCCxUFW8rW4aPZR7bypdeATtS3qIfE_1St1yVhEBDQA&s=10
+Ретро ФМ | https://retro.hostingradio.ru:8043/retro256.mp3 | Pop | https://www.radiobells.com/stations/retrofmrus.webp
+Romantika | https://gpm.hostingradio.ru/gpm-romantika495.aacp | Ballads | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-QqtfjQJAYWG5pi9FxpaqMIKAo6-VrseQu-RnbiIBig&s=10
+РодныеПесни | https://rodpesni.amgradio.ru/rp | Pop | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe9Qkpjbjm7A89dKtc7P4rGI3ww8peJq5mKx1eljlkjQ&s=10
+Maximum | https://maximum.hostingradio.ru/maximum128.mp3 | Рок | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd_qaZbY3Ky8nwEh-ziIh1QHiMVs-ZRM3_Pu9DpFtLqA&s=10
+Heart | https://media-ssl.musicradio.com/HeartLondon |  | https://static.mytuner.mobi/media/tvos_radios/956/heart-london-1062.e0548a1b.png
+Hard Rock | https://radio.hearme.fm:8550/stream |  | https://static.mytuner.mobi/media/tvos_radios/656/hard-rock.30a1f53b.png
+90s Rock | https://radio.hearme.fm:8510/stream |  | https://static.mytuner.mobi/media/tvos_radios/653/90s-rock.c4f779fa.png
+Rock Ballads | https://radio.hearme.fm:8620/stream |  | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8ch-aOjUZMOvW1RYNbu5f058RPHIx1nEK-EDIKp71Hw&s
+RockRecord | https://audio-ssl.itunes.apple.com/itunes-assets/Music/8f/ac/d1/mzm.maioutuq.aac.p.m4a |  | https://vo-radio.ru/images/logoweba/recordrock-180.jpg
+RockFm | https://nashe1.hostingradio.ru:80/rock-128.mp3?wcid=a159035e-d8db-4a3a-bd4c-b7808f4485a3&stationId=rock-main | Рок | https://radiopotok.ru/f/station/512/2066.png
+Rock Remakes | https://srv01.gpmradio.ru/stream/pro/aac/64/71? | Рок | https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDD8xEIt27t1_Uneu-pZbjSJ2aQBhh7axAyse8Hn8z_A&s
+Radio X 90s | https://media-ssl.musicradio.com/RadioX90s |  | https://static.mytuner.mobi/media/tvos_radios/304/radio-x-90s.ae9e3d90.png
+Radio X Classic Rock | https://media-ssl.musicradio.com/RadioXClassicRock | Рок | https://static.mytuner.mobi/media/tvos_radios/307/radio-x-classic-rock.25d7c8d0.png
+Total Rock | https://s3.citrus3.com:8056/stream | metal | https://static.mytuner.mobi/media/tvos_radios/827/total-rock.99fea87d.jpg
+Surf Rock radio | https://radio.dripfeed.net/listen/surfrockradio/radio.mp3 | Рок | https://static.mytuner.mobi/media/tvos_radios/805/surf-rock-radio.7a7f0acf.png
+Ace Cafe Radio | https://listen.radioking.com/radio/69079/stream/106852 | Рок | https://static.mytuner.mobi/media/tvos_radios/708/ace-cafe-radio.98cf1d0f.jpg
+Rockabilly Radio | https://rradio.fastserv.com/hifi | Рок | https://static.mytuner.mobi/media/tvos_radios/5ulyymuu5qwh.png
+РадиоМинск | https://radio.mk.by:8443/radiominsk |  | https://www.radiobells.com/stations/radiominsk.webp
+RockArdenal | https://online.rockarsenal.ru/rockwotalk |  | https://www.radiobells.com/stations/rockarsenal.webp
+Core | https://coreradio.online/radio |  | https://www.radiobells.com/stations/coreradio.webp
+Дискотека80х | https://srv01.gpmradio.ru/stream/pro/aac/64/1 |  | https://www.radiobells.com/stations/disco80.webp
+TapeHits | https://tapehits.com:8005/stream |  | https://www.radiobells.com/stations/radiotapehits.webp
+Народное | https://live.novoeradio.by:444/live/narodnoeradio_aac128/icecast.audio |  | https://www.radiobells.com/stations/narodnoeradioby.webp
+ЛегендыFm | https://blooming-anchorage-74937-01abcbf2453c.herokuapp.com/http://live.legendy.by:8000/legendyfm |  | https://www.radiobells.com/stations/legendyfm.webp
+90xDisco | https://pub0102.101.ru:8443/stream/pro/aac/64/33 |  | https://www.radiobells.com/stations/russia90x.webp
+Punk | https://maximum-punk.hostingradio.ru/maxpunk96.aacp | Rock | https://www.radiobells.com/stations/maximumpunk.webp
+Aurum | https://a5.radioheart.ru:8014/auruminutile | Рок | https://www.radiobells.com/stations/auruminutile.webp
+РадиоГора | https://server.radiogora.ru/listen/drive/drive320 |  | https://www.radiobells.com/stations/radiogoradrive.webp
+TrashDeathMetal | https://blooming-anchorage-74937-01abcbf2453c.herokuapp.com/http://213.141.131.10:8000/thrashblack | Metal | https://www.radiobells.com/stations/capricethrashblackmetal.webp
+Rock-Omlet Radio | https://radio.rock-omlet.com/live | Рок | https://onlayn-radio.ru/uploads/posts/2021-12/vvnszdk9.jpg
+MetalOnli | https://metalonly.spcast.eu/stream?t=1792318915 |  | 
+NDH | https://stream.ndh.fm:1065/stream |  | https://www.radiobells.com/stations/ndhradio.webp
+ПанкиХой | https://nashe1.hostingradio.ru/nashepunks.mp3 | Рок | https://www.radiobells.com/stations/nasheradiopunks.webp
+MCR | https://my-chemical-romance-radio.stream.laut.fm/my-chemical-romance-radio |  | https://lastfm-img.freetls.fastly.net/i/u/500x500/7675defb2787ce67cd030081eb8ff77c.jpg
+The Offspring Radio | https://the-offspring-radio.stream.laut.fm/the-offspring-radio | Punk | https://assets.laut.fm/e04f1846e79cbcac6563ec26606e7b9d
+Fall Out Boy Radio | https://fall-out-boy-radio.stream.laut.fm/fall-out-boy-radio | Punk | https://assets.laut.fm/a0ab31b9c4405c32cc88ec43027553fb
+Sum 41 Radio | https://sum-41-radio.stream.laut.fm/sum-41-radio | Punk | https://assets.laut.fm/037113bcf9b9d2e1ace23f5796cd7dd5
+All Time Low Radio | https://all-time-low-radio.stream.laut.fm/all-time-low-radio | Punk | https://assets.laut.fm/40eb040368fa9b4e9489c2de4a550f43
+Skafari | https://skafari.stream.laut.fm/skafari | Ska-Punk | https://assets.laut.fm/8fe6602ea7185defeafd1173de6dd77a
+Aufden Punk T | https://aufden-punk-t.stream.laut.fm/aufden-punk-t | Ska-Punk | https://assets.laut.fm/af8fae7cb3743066995e9113061406d8
+Radiorebellfest | https://radiorebellfest.stream.laut.fm/radiorebellfest | Punk | https://assets.laut.fm/2b76ea57c6b42874b439d7c4a561b4c8
+Durst Termine | https://durst-termine.stream.laut.fm/durst-termine | Punk | https://assets.laut.fm/df1f0235109c8b9c8371b866f7a83e9a
+Die Toten Hosen Radio | https://die-toten-hosen-radio.stream.laut.fm/die-toten-hosen-radio | Punk | https://assets.laut.fm/bc0b830af2f7f41b2d7821147df019ed
+Die Ärzte Radio | https://die-aerzte-radio.stream.laut.fm/die-aerzte-radio | Punk | https://assets.laut.fm/53a78aad149b40d5ccc21d869ff2612f
+The Clash Radio | https://the-clash-radio.stream.laut.fm/the-clash-radio | Punk | https://assets.laut.fm/595a1b80097e8d050018326555f03919
+Turnstile Radio | https://turnstile-radio.stream.laut.fm/turnstile-radio | Punk | https://assets.laut.fm/92a06a70af21d154ee9f14329411fbdf
+Emocore | https://emocore.stream.laut.fm/emocore | Punk | https://assets.laut.fm/76ab04d1028543a4146c64d8ecf2367f
+Emoscene | https://emoscene.stream.laut.fm/emoscene | Punk | https://assets.laut.fm/d3f5873d98c244ae1d5dad30047963c4
+Avril Lavigne Radio | https://avril-lavigne-radio.stream.laut.fm/avril-lavigne-radio | Punk | https://assets.laut.fm/ca07c5876c2e087ab8b8ab211bf814b5
+904 Rock | https://904rock.stream.laut.fm/904rock | Punk | https://assets.laut.fm/360a22594249cefd865592113a39c9cf
+Postpunk | https://postpunk.stream.laut.fm/postpunk | Punk | https://assets.laut.fm/66efa9c5a860cd2f2ac57ba62892e868
