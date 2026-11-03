@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: pip install pillow
-      - run: cd podradio-logos && python3 fetch.py stations.txt && cd out && zip -q ../../logos.zip *
+      - run: cd podradio-logos && python3 find.py find.txt && cd out && zip -q ../../logos.zip *
       - env:
           GH_TOKEN: ${{ github.token }}
         run: |
