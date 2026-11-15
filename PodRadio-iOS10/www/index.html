@@ -206,7 +206,7 @@ function renderNP(){
   else{s=byUrl(cur);if(s){name=s.n;sub=s.g||"Интернет-радио"}}
   $("#sn").textContent=name;
   $("#tr").textContent=track||sub;
-  var stx={play:"Играет",load:"Подключение…",err:isFile(cur)?"Файл не воспроизводится":"Поток недоступен",stop:cur?"Пауза":""}[state]||"";$("#st").textContent=(stx?stx+"  ·  ":"")+"v1.4";
+  var stx={play:"Играет",load:"Подключение…",err:isFile(cur)?"Файл не воспроизводится":"Поток недоступен",stop:cur?"Пауза":""}[state]||"";$("#st").textContent=(stx?stx+"  ·  ":"")+"v1.7";
   $("#pp").innerHTML=(state==="play"||state==="load")?PAUSE:PLAY;
   var f=$("#fav");f.style.visibility=isFile(cur)?"hidden":"visible";
   f.textContent=s&&isFav(s.u)?"★":"☆";f.className=s&&isFav(s.u)?"on":"";

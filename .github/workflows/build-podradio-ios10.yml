@@ -42,4 +42,4 @@ jobs:
       - name: Выложить в Releases
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "podradio-ios10-${{ github.run_number }}-${{ github.run_attempt }}" PodRadio-iOS10.ipa --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "PodRadio Lite для iOS 10 — сборка ${{ github.run_number }}" --notes "Для iPad 4 и других устройств на iOS 10+. Установка через Sideloadly (подпишите своим Apple ID)."
+        run: gh release create "podradio-ios10-${{ github.run_number }}-${{ github.run_attempt }}" PodRadio-iOS10.ipa --target "$GITHUB_SHA" --repo "${{ github.repository }}" --title "PodRadio Lite для iOS 10 — сборка ${{ github.run_number }}" --notes "Для iPad 4, iPad mini 2 (iOS 12.5) и других устройств на iOS 10+. Установка через Sideloadly (подпишите своим Apple ID)."
